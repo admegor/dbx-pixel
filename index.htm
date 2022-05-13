@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="../css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
     <link rel="stylesheet" href="css/style.css">
     <title>dbx.so</title>
 </head>
@@ -194,28 +193,27 @@
             <section class="main__slider">
                 <div class="main__slider-content _container">
                     <h2 class="main__slider-title _title">Ваш токен может стать следующим Dogelon Mars, Shiba token или даже Dogecoin</h2>
-                    <div class="main__slider-slider">
-                        <div class="main__slider-line">
-                            <div class="main__slider-item">
-                                <div class="main__slider-named">Dogelon Mars</div>
-                                <canvas class="main__slider-graph" id="dogelonMars"></canvas>
-                               
+                    <div class="main__slider-slider-wrap">
+                        <div class="main__slider-slider">
+                            <div class="main__slider-item main__slider-item--dogelon">
+                                <div class="main__slider-graph-wrap">
+                                    <img class="main__slider-image main__slider-graph" src="img/graph-dogelon.png" alt="">
+                                    <div class="main__slider-point">
+                                        <div class="main__slider-point-puls"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="main__slider-item">
-                                <div class="main__slider-named">Shiba token</div>
-                                <canvas class="main__slider-graph" id="shiba"></canvas>
-                                
+                            <div class="main__slider-item main__slider-item--dogelon">
+                                <img class="main__slider-image main__slider-graph" src="img/graph-shiba.png" alt="">                                
                             </div>
-                            <div class="main__slider-item">
-                                <div class="main__slider-named">Dogecoin</div>
-                                <canvas class="main__slider-graph" id="dogecoin"></canvas>
+                            <div class="main__slider-item main__slider-item--">
+                                <img class="main__slider-image main__slider-graph" src="img/graph-dogecoin.png" alt="">                        
+                            </div>
+                        </div>
                         
-                            </div>
-                        </div>
-                        <div class="main__slider-buttons">
-                            <div class="main__slider-button main__slider-prev"><img src="img/left-arrow-slider.svg" alt=""></div><div class="main__slider-name">Dogelon Mars</div><div class="main__slider-button main__slider-next"><img src="img/right-arrow-slider.svg" alt=""></div>
-                        </div>
+                        <div class="main__slider-name">Dogelon Mars</div>
                     </div>
+                </div>
                 </div>
             </section>
             <section class="main__opportunities">
@@ -384,7 +382,9 @@
             </div>
         </footer>
     </div>
-    <script src="../npm/chart.js%403.7.1/dist/chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
     <script src="js/main.js"></script>
 
 </body>
