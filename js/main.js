@@ -168,21 +168,39 @@ window.addEventListener('resize', () => {
     promoHeight();
 });
 
-let mainSliderNname = document.querySelector('.main__slider-name');
+$(document).ready(function(){
+    let mainSliderNname = document.querySelector('.main__slider-name');
 
-$('.main__slider-slider').slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1
-});
+    $('.main__slider-slider').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [
+            {
+              breakpoint: 768,
+                settings: {
+                    swipe: false,
+                }
+            }
+          ]    
+    });
+    
+    $('.main__slider-slider').on("afterChange", function(event, slick, currentSlide, nextSlide) {
+        if (currentSlide === 0) {
+            mainSliderNname.textContent = "Dogelon Mars";
+        } else if (currentSlide === 1) {
+            mainSliderNname.textContent = "Shiba token";
+        } else if (currentSlide === 2) {
+            mainSliderNname.textContent = "Dogecoin";
+        }
+    });
+    
+    const mainSliderImages = document.querySelectorAll('.main__slider-image-wrap');    
+     
+        mainSliderImages.forEach( mainSliderImage => {
+            console.log(mainSliderImage);
+            mainSliderImage.scrollLeft = 1000;
+        })    
+    
+})
 
-$('.main__slider-slider').on("afterChange", function(event, slick, currentSlide, nextSlide) {
-    console.log(currentSlide);
-    if (currentSlide === 0) {
-        mainSliderNname.textContent = "Dogelon Mars";
-    } else if (currentSlide === 1) {
-        mainSliderNname.textContent = "Shiba token";
-    } else if (currentSlide === 2) {
-        mainSliderNname.textContent = "Dogecoin";
-    }
-});
