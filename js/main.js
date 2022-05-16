@@ -198,7 +198,6 @@ $(document).ready(function(){
     const mainSliderImages = document.querySelectorAll('.main__slider-image-wrap');    
      
         mainSliderImages.forEach( mainSliderImage => {
-            console.log(mainSliderImage);
             mainSliderImage.scrollLeft = 1000;
         })    
     
