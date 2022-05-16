@@ -531,6 +531,12 @@ h2._title {
   margin: 70px 0 0 0;
   font-size: 30px;
 }
+
+@media (max-width: 1540px) {
+  .main__help-item-title {
+    font-size: 23px;
+  }
+}
 @media (max-width: 1023px) {
   .main__help-item-title {
     -ms-flex-item-align: center;
