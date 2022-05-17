@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     radioInput.forEach(el => disableSelection(el))
+
+
 })
 
 const tokenNameInput = document.getElementById('tokenName');
@@ -243,19 +245,29 @@ function popupOpen(currentPopup, title) {
         const popupActive = document.querySelector('.popup-pixel.open');
         const popupTheme = document.querySelector('.popup-pixel__theme');
         const popupTitle = document.querySelector('.popup-pixel__title');
+        const userName = document.querySelector('#user-name');
         let popupTitleTheme = '';
+        let popupTitleText =  [];
+
+        setTimeout(function () {
+            userName.focus();
+        }, timeout);        
 
         if (document.documentElement.lang == "en") {
-            popupTitleTheme = "Theme: "
+            popupTitleTheme = "Theme: ";
+            popupTitleText[0] = "Free consultation";
+            popupTitleText[1] = "There's only one step left...";
         } else if (document.documentElement.lang == "ru") {
             popupTitleTheme = "Тема: "
+            popupTitleText[0] = "Бесплатная консультация";
+            popupTitleText[1] = "Остался всего один шаг...";
         }
 
         if (title !== undefined) {
             popupTheme.innerHTML = `<span class="accent-text">${popupTitleTheme}</span>${title}</div>`;
-            popupTitle.textContent = "Бесплатная консультация"
+            popupTitle.textContent = popupTitleText[0];
         } else {
-            popupTitle.textContent = "Остался всего один шаг..."
+            popupTitle.textContent = popupTitleText[1];
             popupTheme.innerHTML = ``;            
         }
         if (popupActive) {

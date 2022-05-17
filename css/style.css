@@ -2148,6 +2148,7 @@ body.lock {
   font-weight: 700;
   line-height: 43px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .popup-pixel__subtitle {
