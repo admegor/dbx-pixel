@@ -69,10 +69,10 @@ for(reqField of requiredFields) {
             }
         })
         if(i == requiredFields.length) {
-            releaseButton.disabled = false;
+            releaseButton.classList.remove('main__button--disabled');
         }
         else {
-            releaseButton.disabled = true;
+            releaseButton.classList.add('main__button--disabled');
         }
     })
 }
@@ -220,9 +220,9 @@ for (let i = 0; i < popupLinks.length; i++) {
     popupLink.addEventListener('click', function(e) {
         const popupName = popupLink.getAttribute('href').replace('#', '');
         const currentPopup = document.getElementById(popupName);
-        popupOpen(currentPopup);
+        let titleModal = popupLink.dataset.theme;
+        popupOpen(currentPopup, titleModal);
         e.preventDefault();
-        console.log(popupLinks.dataset.theme)
     })
 }
 
@@ -238,11 +238,23 @@ if (popupCloseIcon.length > 0) {
     }
 }
 
-function popupOpen(currentPopup) {
+function popupOpen(currentPopup, title) {
     if (currentPopup && unlock) {
         const popupActive = document.querySelector('.popup-pixel.open');
+        let popupTheme = document.querySelector('.popup-pixel__theme');
+        let popupTitle = document.querySelector('.popup-pixel__title');
+
+        if (title !== undefined) {
+            popupTheme.innerHTML = `<span class="accent-text">Тема: </span>${title}</div>`;
+            popupTitle.textContent = "Бесплатная консультация"
+        } else {
+            popupTitle.textContent = "Остался всего один шаг..."
+            popupTheme.innerHTML = ``;            
+        }
         if (popupActive) {
             popupClose(popupActive, false)
+        } else {
+            bodyLock();
         }
 
         currentPopup.classList.add('open');
@@ -257,7 +269,44 @@ function popupOpen(currentPopup) {
 function popupClose(popupActive, doUnlock = true) {
     if (unlock) {
         popupActive.classList.remove('open');
+        if (doUnlock) {
+            bodyUnLock();
+        }
     }
+}
+
+function bodyLock() {
+    const lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
+
+    if (lockPadding > 0) {
+        for (let index = 0; index < lockPadding.length; i++) {
+            const el = lockPadding[index];
+            el.style.paddingRight = lockPaddingValue;
+        }
+    }
+    body.style.paddingRight = lockPaddingValue;
+    body.classList.add('lock');
+
+    unlock = false;
+    setTimeout(function() {
+        unlock = true;
+    }, timeout);
+}
+
+function bodyUnLock() {
+    setTimeout(function () {
+        for (let index = 0; index < lockPadding.length; index++) {
+            const el = lockPadding[index];
+            el.style.paddingRight = '0px'
+        }
+        body.style.paddingRight = '0px';
+        body.classList.remove('lock');
+    }, timeout);
+
+    unlock = false;
+    setTimeout(function () {
+        unlock = true;
+    }, timeout)
 }
 
 document.addEventListener('keydown', function(e) {

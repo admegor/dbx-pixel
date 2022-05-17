@@ -2087,6 +2087,10 @@ h2._title {
   color: #7A18D5;
 }
 
+body.lock {
+  overflow: hidden;
+}
+
 .popup-pixel {
   z-index: 16;
   position: fixed;
@@ -2198,4 +2202,75 @@ h2._title {
   font-size: 18px;
   line-height: 22px;
   cursor: pointer;
+}
+
+.main__button--popup {
+  text-align: center;
+}
+
+.main__create-form .main__button--disabled {
+  pointer-events: none;
+  color: #D0D2D3;
+  border-color: #D0D2D3;
+}
+
+@media (max-width: 767px) {
+  .popup-pixel__content {
+    padding: 40px 20px 25px;
+  }
+  .popup-pixel__title {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  .popup-pixel__subtitle {
+    line-height: 1.2;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .popup-pixel__theme {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+  .popup-form__label {
+    font-size: 16px;
+  }
+  .popup-form__submit {
+    font-size: 14px;
+    width: 100%;
+  }
+  .popup-form__text {
+    margin-bottom: 15px;
+  }
+  #tel-tg.popup-form__text {
+    margin-bottom: 25px;
+  }
+  .popup-pixel__close {
+    position: absolute;
+    border: 1px solid #7A18D5;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    top: 16px;
+    right: 13px;
+  }
+  .popup-pixel__close::before {
+      content: "";
+      position: absolute;
+      background-color: #7A18D5;
+      width: 19px;
+      height: 2px;
+      top: 14px;
+      right: 5px;
+      transform: rotate(45deg);
+  }
+  .popup-pixel__close:after {
+      content: "";
+      position: absolute;
+      background-color: #7A18D5;
+      width: 19px;
+      height: 2px;
+      top: 14px;
+      right: 5px;
+      transform: rotate(-45deg);
+  }
 }

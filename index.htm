@@ -36,14 +36,14 @@
         <div id="popup-pixel" class="popup-pixel">
             <div class="popup-pixel__body">
                 <div class="popup-pixel__content">
-                    <a class="popup-pixel__close close-popup-pixel" href="#"></a>
+                    <a class="popup-pixel__close close-popup" href="#"></a>
                     <div class="popup-pixel__wrap">
                         <h2 class="popup-pixel__title">Бесплатная консультация</h2>
                         <p class="popup-pixel__subtitle">Оставьте свои контактные данные, наш менеджер свяжется с вами в ближайшее время.</p>
-                        <div class="popup-pixel__theme"><span class="accent-text">Тема: </span>Стартовый набор</div>
+                        <div class="popup-pixel__theme"></div>
                         <form class="popup-form" action="">
-                            <label class="popup-form__label" for="name">Ваше имя</label>
-                            <input class="popup-form__text" type="text" name="Ваше имя" id="name">
+                            <label class="popup-form__label" for="user-name">Ваше имя</label>
+                            <input class="popup-form__text" type="text" name="Ваше имя" id="user-name">
                             <label class="popup-form__label" for="tel-tg">Ваш телефон / имя пользователя в Telegram</label>
                             <input class="popup-form__text" type="text" name="телефон / telegram" id="tel-tg">
                             <div class="popup-form__submit-wrap">
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="main__section-button"><a href="#popup-pixel" class="main__button popup-link"><div class="btn">Создать токен</div></a></div>
+                    <div class="main__section-button"><a href="#popup-pixel" class="main__button popup-link" data-theme="Создать токен"><div class="btn">Создать токен</div></a></div>
                 </div>
             </section>
             <section class="main__create">
@@ -189,12 +189,6 @@
                                         изображение</div></a>
                                 </div>
                             </div>
-                            <div class="main__create-row">
-                                <div class="main__create-input _input">
-                                    <label for="tokenContact">Ваш телефон / имя пользователя в Telegram</label>
-                                    <input class="formRequired" id="tokenContact" type="text" required="" autocomplete="off">
-                                </div>
-                            </div>
                          </div>
                          <div class="main__create-col">
                              <div class="main__create-result">
@@ -202,13 +196,13 @@
                                      <div class="main__create-img" data-href="#customImagePopup">
                                          <img id="resultImage" class="lockImage" src="img/dbx-custom-token.png" alt="custom">
                                      </div>
-                                     <div class="main__create-name">
-                                         
+                                     <div class="main__create-name">                                         
                                      </div>
                                      <div class="main__create-cost"></div>
                                  </div>
                                  <div class="main__create-release">
-                                     <button type="submit" id="releaseButton" class="main__button" disabled="">Выпустить</button>
+                                     <a href="popup-pixel" id="releaseButton" class="main__button main__button--popup main__button--disabled popup-link" >Выпустить</a>
+                                     <!-- <button href="popup-pixel" type="submit" id="releaseButton" class="main__button" disabled="">Выпустить</button> -->
                                  </div>
                              </div>
                          </div>
@@ -220,8 +214,6 @@
                     <h2 class="main__slider-title _title">Ваш токен может стать следующим Dogelon Mars, Shiba token или даже Dogecoin</h2>
                     <div class="main__slider-slider-wrap">
                         <div class="main__slider-slider">
-
-                            <!-- slide#1 -->
 
                             <div class="main__slider-item main__slider-item--dogelon">
                                 <div class="main__slider-graph-wrap">
@@ -243,8 +235,6 @@
                                 </div>                                
                             </div>
 
-                            <!-- slide#2 -->
-
                             <div class="main__slider-item main__slider-item--shiba">
                                 <div class="main__slider-graph-wrap">
                                     <div class="main__slider-image-wrap">
@@ -264,8 +254,6 @@
                                     </div>
                                 </div>                                
                             </div>
-
-                            <!-- slide#3 -->
 
                             <div class="main__slider-item main__slider-item--dogecoin">
                                 <div class="main__slider-graph-wrap">
@@ -306,7 +294,7 @@
                                     Подойдет тем, кто хочет начать свой путь в крипто и дать своей аудитории новые возможности проявить свою преданность бренду
                                 </div>
                             </div>
-                            <div class="main__opportunities-button"><a class="popup-link" href="#popup-pixel">Подробнее <img src="img/right-arrow-slider.svg" alt="Right arrow"></a></div>
+                            <div class="main__opportunities-button"><a class="popup-link" href="#popup-pixel" data-theme="Выпуск токена">Подробнее <img src="img/right-arrow-slider.svg" alt="Right arrow"></a></div>
                         </div>
                         <div class="main__opportunities-item">
                             <div class="main__opportunities-cover">
@@ -316,7 +304,7 @@
                                     Отличное решение для тех, кто любит искусство и хочет самореализоваться в индустрии цифрового искусства
                                 </div>
                             </div>
-                            <div class="main__opportunities-button"><a class="popup-link" href="#popup-pixel">Подробнее <img src="img/right-arrow-slider.svg" alt="Right arrow"></a></div>
+                            <div class="main__opportunities-button"><a class="popup-link" href="#popup-pixel" data-theme="Выпуск NFT коллекции">Подробнее <img src="img/right-arrow-slider.svg" alt="Right arrow"></a></div>
                         </div>
                     </div>
                 </div>
@@ -347,7 +335,7 @@
                                     </li>
                                 </ul>
                                 <div class="main__rate-button">
-                                    <a href="#popup-pixel" class="main__button _white popup-link"><div class="btn">Выбрать тариф</div></a>
+                                    <a href="#popup-pixel" class="main__button _white popup-link" data-theme="Тариф стартовый набор"><div class="btn">Выбрать тариф</div></a>
                                 </div>
                             </div>
                         </div>
@@ -376,7 +364,7 @@
                                     </li>
                                 </ul>
                                 <div class="main__rate-button">
-                                    <a href="#popup-pixel" class="main__button _white popup-link"><div class="btn">Выбрать тариф</div></a>
+                                    <a href="#popup-pixel" class="main__button _white popup-link" data-theme="Тариф под ключ"><div class="btn">Выбрать тариф</div></a>
                                 </div>
                             </div>
                         </div>
