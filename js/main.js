@@ -241,11 +241,19 @@ if (popupCloseIcon.length > 0) {
 function popupOpen(currentPopup, title) {
     if (currentPopup && unlock) {
         const popupActive = document.querySelector('.popup-pixel.open');
-        let popupTheme = document.querySelector('.popup-pixel__theme');
-        let popupTitle = document.querySelector('.popup-pixel__title');
+        const popupTheme = document.querySelector('.popup-pixel__theme');
+        const popupTitle = document.querySelector('.popup-pixel__title');
+        let popupTitleTheme = '';
+        console.dir(document.documentElement.lang)
+
+        if (document.documentElement.lang == "en") {
+            popupTitleTheme = "Theme: "
+        } else if (document.documentElement.lang == "ru") {
+            popupTitleTheme = "Тема: "
+        }
 
         if (title !== undefined) {
-            popupTheme.innerHTML = `<span class="accent-text">Тема: </span>${title}</div>`;
+            popupTheme.innerHTML = `<span class="accent-text">${popupTitleTheme}</span>${title}</div>`;
             popupTitle.textContent = "Бесплатная консультация"
         } else {
             popupTitle.textContent = "Остался всего один шаг..."
