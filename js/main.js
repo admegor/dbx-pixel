@@ -244,7 +244,6 @@ function popupOpen(currentPopup, title) {
         const popupTheme = document.querySelector('.popup-pixel__theme');
         const popupTitle = document.querySelector('.popup-pixel__title');
         let popupTitleTheme = '';
-        console.dir(document.documentElement.lang)
 
         if (document.documentElement.lang == "en") {
             popupTitleTheme = "Theme: "
