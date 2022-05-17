@@ -101,9 +101,15 @@ closeCustomImage.addEventListener('click', function(e) {
     document.querySelector('body').classList.remove('_lock');
 })
 
+function getElementImage() {
+    const resultImage = document.getElementById('resultImage');
+    return resultImage;
+}
 
+getElementImage();
 
-const resultImage = document.getElementById('resultImage');
+console.log(resultImage);
+
 
 for(radio of radioInput) {
     radio.addEventListener('click', function() {
@@ -261,6 +267,8 @@ function popupOpen(currentPopup, title) {
             popupTitleTheme = "Тема: "
             popupTitleText[0] = "Бесплатная консультация";
             popupTitleText[1] = "Остался всего один шаг...";
+        } else {
+            console.log("document.documentElement.lang: Error")
         }
 
         if (title !== undefined) {
@@ -334,3 +342,45 @@ document.addEventListener('keydown', function(e) {
         popupClose(popupActive);
     }
 })
+
+// add file image
+
+function upload(selector) {
+    const inputImageBtn = document.querySelector(selector);
+
+    const changeHandler = event => {
+        console.log(event.target.files)
+        if (!event.target.files.length) {
+            return
+        } 
+
+        const files = Array.from(event.target.files);
+        const resultImageWrap = document.querySelector('.main__create-img');
+        const customImagePopup = document.getElementById('customImagePopup');
+        const resultImage = document.getElementById('resultImage');
+
+        files.forEach(file => {
+            if (!file.type.match('image')) {
+                return
+            }
+            const reader = new FileReader();
+    
+            reader.onload = ev => {
+                const srcImage = ev.target.result;
+                console.log(srcImage);
+                resultImage.remove();
+                resultImageWrap.insertAdjacentHTML('afterbegin', `<img id="resultImage" class="lockImage" src="${srcImage}" alt="${file.name}">`);
+                customImagePopup.classList.remove('_active');
+            }
+            reader.readAsDataURL(file);
+
+        })
+
+
+    }
+
+    inputImageBtn.addEventListener('change', changeHandler)
+
+}
+
+upload('#imageSelect');

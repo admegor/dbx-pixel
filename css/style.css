@@ -370,6 +370,8 @@ h2._title {
   padding: 71px 108px 80px 53px;
   z-index: 10;
   width: 100%;
+  display: block;
+
 }
 @media (min-width: 1024px) {
   .main__business-block {
@@ -418,6 +420,7 @@ h2._title {
   margin: 0 0 60px 0;
   font-size: 45px;
   line-height: 125%;
+  color: #262626;
 }
 @media (max-width: 767px) {
   .main__business-text {
