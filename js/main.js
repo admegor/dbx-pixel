@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     radioInput.forEach(el => disableSelection(el))
 
-
 })
 
 const tokenNameInput = document.getElementById('tokenName');
@@ -35,6 +34,8 @@ const tokenName = document.querySelector('.main__create-name');
 
 const tokenCostInput = document.getElementById('tokenCost');
 const tokenCost = document.querySelector('.main__create-cost');
+
+const tokenAmountInput = document.getElementById('tokenAmount');
 
 const tokenContactInput = document.getElementById('tokenContact');
 
@@ -46,6 +47,7 @@ const requiredFields = document.querySelectorAll('.formRequired');
 
 tokenNameInput.addEventListener('input', function() {
     tokenName.innerText = tokenNameInput.value;
+    releaseButton.dataset.tokenName = tokenNameInput.value;
     if(tokenNameInput.value.length > 16) {
         tokenNameInput.value = tokenNameInput.value.slice(0, 15);
     }
@@ -53,12 +55,16 @@ tokenNameInput.addEventListener('input', function() {
 
 });
 
+tokenAmountInput.addEventListener('input', function() {
+    releaseButton.dataset.tokenAmount = tokenAmountInput.value;
+});
+
 tokenCostInput.addEventListener('input', function() {
     tokenCost.innerText = tokenCostInput.value + ' $';
+    releaseButton.dataset.tokenPrice = tokenCostInput.value + ' $';
     if (tokenCostInput.value > 1000000) {
         tokenCostInput.value = 1000000;
     }
-
 
 });
 
@@ -101,21 +107,24 @@ closeCustomImage.addEventListener('click', function(e) {
     document.querySelector('body').classList.remove('_lock');
 })
 
-function getElementImage() {
-    const resultImage = document.getElementById('resultImage');
-    return resultImage;
-}
-
-getElementImage();
-
-console.log(resultImage);
-
+const resultImage = document.getElementById('resultImage');
 
 for(radio of radioInput) {
     radio.addEventListener('click', function() {
         resultImage.setAttribute('src', this.getAttribute('src'));
     })
 }
+
+function handlerForm(popupLink) {
+    let tokenName = document.querySelector('input[name="token-name"]');
+    let tokenAmount = document.querySelector('input[name="token-amount"]');
+    let tokenPrice = document.querySelector('input[name="token-price"]');
+    tokenName.value = popupLink.dataset.tokenName;
+    tokenAmount.value = popupLink.dataset.tokenAmount;
+    tokenPrice.value = popupLink.dataset.tokenPrice;
+}
+
+//slider old
 
 
 const sliderImages = document.querySelectorAll('.main__slider-item');
@@ -231,6 +240,10 @@ for (let i = 0; i < popupLinks.length; i++) {
         let titleModal = popupLink.dataset.theme;
         popupOpen(currentPopup, titleModal);
         e.preventDefault();
+
+        if (popupLink.classList.contains('main__button--popup')) {
+            handlerForm(popupLink);
+        }
     })
 }
 
@@ -345,20 +358,93 @@ document.addEventListener('keydown', function(e) {
 
 // add file image
 
-function upload(selector) {
-    const inputImageBtn = document.querySelector(selector);
+const inputImageBtn = document.querySelector('#imageSelect');
+const resultImageWrap = document.querySelector('.main__create-img');
+const customImagePopup = document.getElementById('customImagePopup');
+const fileFieldHidden = document.querySelector('.file-field-hidden');
+const fileFieldVisible = document.querySelector('.file-field-visible');
+const dropZoneElement = document.querySelector('.popup__image-content');
+const dropZoneBorder = document.querySelector('.popup__image-border');
 
-    const changeHandler = event => {
-        console.log(event.target.files)
-        if (!event.target.files.length) {
+const changeHandler = event => {
+    if (!event.target.files.length) {
+        return
+    } 
+    resultImage.remove();
+    const files = Array.from(event.target.files);
+    
+    files.forEach(file => {
+        if (!file.type.match('image')) {
             return
-        } 
+        }
+        const reader = new FileReader();
 
-        const files = Array.from(event.target.files);
-        const resultImageWrap = document.querySelector('.main__create-img');
-        const customImagePopup = document.getElementById('customImagePopup');
-        const resultImage = document.getElementById('resultImage');
+        reader.onload = ev => {
+            const srcImage = ev.target.result;
+            resultImageWrap.insertAdjacentHTML('afterbegin', `<img id="resultImage" class="lockImage" src="${srcImage}" alt="${file.name}">`);
+            customImagePopup.classList.remove('_active');
+            body.classList.remove('_lock');
+        }
+        reader.readAsDataURL(file);
+    })
+}
 
+
+const triggerInput = () => fileFieldHidden.click();
+
+fileFieldVisible.addEventListener('click', triggerInput);
+
+//drag-and-drop
+
+dropZoneElement.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZoneBorder.classList.add('popup__image-border--active');
+})
+dropZoneElement.addEventListener('dragleave', e => {
+    e.preventDefault();
+    dropZoneBorder.classList.remove('popup__image-border--active');
+})
+dropZoneElement.addEventListener('dragend', e => {
+    e.preventDefault();
+    dropZoneBorder.classList.remove('popup__image-border--active');
+})
+
+dropZoneElement.addEventListener('drop', e => {
+    e.preventDefault();
+    resultImage.remove();
+    inputImageBtn.files = e.dataTransfer.files;
+
+    const files = Array.from(inputImageBtn.files)
+
+    files.forEach(file => {
+        if (!file.type.match('image')) {
+            return
+        }
+        const reader = new FileReader();
+
+        reader.onload = ev => {
+            const srcImage = ev.target.result;
+            resultImageWrap.insertAdjacentHTML('afterbegin', `<img id="resultImage" class="lockImage" src="${srcImage}" alt="${file.name}">`);
+            customImagePopup.classList.remove('_active');
+            body.classList.remove('_lock');
+        }
+        reader.readAsDataURL(file);
+    })
+})
+
+inputImageBtn.addEventListener('change', changeHandler);
+
+
+console.log(resultImage)
+window.addEventListener('paste', e => {
+    resultImage.remove();
+    e.preventDefault();
+    console.log(resultImage)
+
+    if (customImagePopup.classList.contains('_active')) {
+        inputImageBtn.files = e.clipboardData.files;
+        const files = Array.from(inputImageBtn.files)
+    
         files.forEach(file => {
             if (!file.type.match('image')) {
                 return
@@ -366,21 +452,12 @@ function upload(selector) {
             const reader = new FileReader();
     
             reader.onload = ev => {
-                const srcImage = ev.target.result;
-                console.log(srcImage);
-                resultImage.remove();
+                const srcImage = ev.target.result;                
                 resultImageWrap.insertAdjacentHTML('afterbegin', `<img id="resultImage" class="lockImage" src="${srcImage}" alt="${file.name}">`);
                 customImagePopup.classList.remove('_active');
+                body.classList.remove('_lock');
             }
             reader.readAsDataURL(file);
-
-        })
-
-
+        })        
     }
-
-    inputImageBtn.addEventListener('change', changeHandler)
-
-}
-
-upload('#imageSelect');
+  });

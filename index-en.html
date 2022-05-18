@@ -24,7 +24,7 @@
                     <div class="popup__image-text">or click on the button</div>
                     <div class="popup__image-buttons">
                         <div class="main__button _purple">
-                            <input type="file" id="imageSelect"><label for="imageSelect"><div class="btn">Select a file</div></label>
+                            <div class="btn file-field-visible">Select a file</div>                            
                         </div>
                     
                         <a href="#" class="main__button _white"><div class="btn">Paste from buffer</div></a>
@@ -46,9 +46,12 @@
                             <input class="popup-form__text" type="text" name="Your name" id="user-name">
                             <label class="popup-form__label" for="tel-tg">Your phone number / nickname in Telegram</label>
                             <input class="popup-form__text" type="text" name="phone / telegram" id="tel-tg">
+                            <input type="hidden" name="token-name">
+                            <input type="hidden" name="token-amount">
+                            <input type="hidden" name="token-price">
+                            <input class="file-field-hidden" type="file" id="imageSelect" accept=".png,.jpg,.jpeg,.gif">
                             <div class="popup-form__submit-wrap">
-                                <input class="popup-form__submit" type="submit" value="Send">
-                                
+                                <input class="popup-form__submit" type="submit" value="Send">                                
                             </div>
                         </form>
                     </div>
@@ -80,7 +83,7 @@
             </section>
             <section class="main__business">
                 <div class="main__business-content _container">
-                    <a href="#popup-pixel" class="main__business-block popup-link" data-theme="Create token">
+                    <a href="popup-pixel" class="main__business-block popup-link" data-theme="Create token">
                         <div class="main__business-text">We will help you launch your own business in the blockchain industry and increase your income</div>
                         <div class="main__businness-arrow"><img src="img/right-arrow-1.svg" alt="Right Arrow"></div>
                     </a>
@@ -93,7 +96,7 @@
                 <div class="main__help-content _container">
                     <h2 class="main__help-title _title title-second visually-hidden">We will help you:</h2>
                     <div class="main__help-items">
-                        <a href="#popup-pixel" class="main__help-item popup-link" data-theme="Create your token">
+                        <a href="popup-pixel" class="main__help-item popup-link" data-theme="Create token">
                             <div class="main__help-img">
                                 <img src="img/dbx-trends.png" alt="Be in trend">
                             </div>
@@ -101,7 +104,7 @@
                                 Get on trend
                             </div>
                         </a>
-                        <a href="#popup-pixel" class="main__help-item popup-link" data-theme="Create your token">
+                        <a href="popup-pixel" class="main__help-item popup-link" data-theme="Create token">
                             <div class="main__help-img">
                                 <img src="img/dbx-new-community.png" alt="New community">
                             </div>
@@ -109,7 +112,7 @@
                                 Developing<br> a new community
                             </div>
                         </a>
-                        <a href="#popup-pixel" class="main__help-item popup-link" data-theme="Create your token">
+                        <a href="popup-pixel" class="main__help-item popup-link" data-theme="Create token">
                             <div class="main__help-img">
                                 <img src="img/dbx-product.png" alt="New product">
                             </div>
@@ -117,7 +120,7 @@
                                 Creating<br> a new product
                             </div>
                         </a>
-                        <a href="#popup-pixel" class="main__help-item popup-link" data-theme="Create your token">
+                        <a href="popup-pixel" class="main__help-item popup-link" data-theme="Create token">
                             <div class="main__help-img">
                                 <img src="img/dbx-investments.png" alt="Investments">
                             </div>
@@ -195,7 +198,7 @@
                                      <div class="main__create-cost"></div>
                                  </div>
                                  <div class="main__create-release">
-                                     <a href="popup-pixel" id="releaseButton" class="main__button main__button--popup main__button--disabled popup-link" >Issue it</a>
+                                     <a href="popup-pixel" id="releaseButton" class="main__button main__button--popup main__button--disabled popup-link" data-token-name="" data-token-amount="" data-token-price="">Issue it</a>
                                  </div>
                              </div>
                          </div>

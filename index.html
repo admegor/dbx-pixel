@@ -24,7 +24,7 @@
                     <div class="popup__image-text">или нажмите на кнопку</div>
                     <div class="popup__image-buttons">
                         <div class="main__button _purple">
-                            <input type="file" id="imageSelect" accept=".png,.jpg,.jpeg,.gif"><label for="imageSelect"><div class="btn">Выбрать файл</div></label>
+                            <div class="btn file-field-visible">Выбрать файл</div>
                         </div>
                     
                         <a href="#" class="main__button _white"><div class="btn">Вставить из буфера</div></a>
@@ -46,9 +46,12 @@
                             <input class="popup-form__text" type="text" name="Ваше имя" id="user-name">
                             <label class="popup-form__label" for="tel-tg">Ваш телефон / имя пользователя в Telegram</label>
                             <input class="popup-form__text" type="text" name="телефон / telegram" id="tel-tg">
+                            <input type="hidden" name="token-name">
+                            <input type="hidden" name="token-amount">
+                            <input type="hidden" name="token-price">
+                            <input class="file-field-hidden" type="file" id="imageSelect" accept=".png,.jpg,.jpeg,.gif">
                             <div class="popup-form__submit-wrap">
-                                <input class="popup-form__submit" type="submit" value="Отправить">
-                                
+                                <input class="popup-form__submit" type="submit" value="Отправить">                                
                             </div>
                         </form>
                     </div>
@@ -201,8 +204,7 @@
                                      <div class="main__create-cost"></div>
                                  </div>
                                  <div class="main__create-release">
-                                     <a href="popup-pixel" id="releaseButton" class="main__button main__button--popup main__button--disabled popup-link" >Выпустить</a>
-                                     <!-- <button href="popup-pixel" type="submit" id="releaseButton" class="main__button" disabled="">Выпустить</button> -->
+                                     <a href="popup-pixel" id="releaseButton" class="main__button main__button--popup main__button--disabled popup-link" data-token-name="" data-token-amount="" data-token-price="">Выпустить</a>
                                  </div>
                              </div>
                          </div>

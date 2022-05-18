@@ -371,7 +371,6 @@ h2._title {
   z-index: 10;
   width: 100%;
   display: block;
-
 }
 @media (min-width: 1024px) {
   .main__business-block {
@@ -1601,6 +1600,8 @@ h2._title {
   overflow: hidden;
   max-width: 100%;
   display: flex;
+  min-width: 0;
+  width: 100%;
 }
 
 .main__slider-title {
@@ -1966,6 +1967,7 @@ h2._title {
   padding-top: 50px;
   position: relative;
   overflow: hidden;
+  width: 1520px;
 }
 
 @media (max-width: 1540px) {
@@ -2173,6 +2175,7 @@ body.lock {
   border: 1px solid rgba(38, 38, 38, 0.5);
   margin-bottom: 20px;
   height: 48px;
+  width: 100%;
 }
 
 .popup-form__text:focus-visible {
@@ -2277,4 +2280,20 @@ body.lock {
       right: 5px;
       transform: rotate(-45deg);
   }
+}
+
+.file-field-hidden {
+  display: none;
+}
+
+.file-field-visible {
+  cursor: pointer;
+}
+
+.popup__image-border--active {
+  border: 2px solid #7A18D5;
+}
+
+.popup__image-buttons a {
+  cursor: context-menu;
 }
