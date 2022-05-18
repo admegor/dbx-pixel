@@ -272,7 +272,7 @@ function popupOpen(currentPopup, title) {
             userName.focus();
         }, timeout);        
 
-        if (document.documentElement.lang == "en") {
+        if (document.documentElement.lang == "en-US") {
             popupTitleTheme = "Theme: ";
             popupTitleText[0] = "Free consultation";
             popupTitleText[1] = "There's only one step left...";
