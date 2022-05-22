@@ -87,13 +87,12 @@ for(reqField of requiredFields) {
 
 const customImage = document.getElementById('customImage');
 const closeCustomImage = document.getElementById('closeImagePopup');
-const resultImg = document.querySelector(".main__create-img");
+const resultImg = document.querySelector(".main__create-image");
 
 resultImg.addEventListener('click', function(e) {
     document.querySelector(this.getAttribute('data-href')).classList.add('_active');
     document.querySelector('body').classList.add('_lock');
 })
-
 
 customImage.addEventListener('click', function(e) {
     e.preventDefault();
@@ -107,11 +106,12 @@ closeCustomImage.addEventListener('click', function(e) {
     document.querySelector('body').classList.remove('_lock');
 })
 
-const resultImage = document.getElementById('resultImage');
 
 for(radio of radioInput) {
     radio.addEventListener('click', function() {
-        resultImage.setAttribute('src', this.getAttribute('src'));
+        const resultImage = document.querySelector('.main__create-image');
+        let imageSrc = this.getAttribute('src');
+        resultImage.style.backgroundImage = `url(${imageSrc})`;
     })
 }
 
@@ -253,8 +253,8 @@ if (popupCloseIcon.length > 0) {
     for (let i = 0; i < popupCloseIcon.length; i++) {
         const el = popupCloseIcon[i];
         el.addEventListener('click', function(e) {
-            popupClose(el.closest('.popup-pixel'));
             e.preventDefault();
+            popupClose(el.closest('.popup-pixel'));
         })
     }
 }
@@ -276,7 +276,7 @@ function popupOpen(currentPopup, title) {
             popupTitleTheme = "Theme: ";
             popupTitleText[0] = "Free consultation";
             popupTitleText[1] = "There's only one step left...";
-        } else if (document.documentElement.lang == "ru") {
+        } else if (document.documentElement.lang == "ru" || "ru-RU") {
             popupTitleTheme = "Тема: "
             popupTitleText[0] = "Бесплатная консультация";
             popupTitleText[1] = "Остался всего один шаг...";
@@ -351,15 +351,17 @@ function bodyUnLock() {
 
 document.addEventListener('keydown', function(e) {
     if (e.which === 27) {
-        const popupActive = document.querySelector('.popup-pixel.open');
-        popupClose(popupActive);
+        const popupActive = document.querySelector('.popup-pixel');
+        if (popupActive.classList.contains('open')) {
+            popupClose(popupActive);
+        }
     }
 })
 
 // add file image
 
 const inputImageBtn = document.querySelector('#imageSelect');
-const resultImageWrap = document.querySelector('.main__create-img');
+const resultImageWrap = document.querySelector('.main__create-image-wrap');
 const customImagePopup = document.getElementById('customImagePopup');
 const fileFieldHidden = document.querySelector('.file-field-hidden');
 const fileFieldVisible = document.querySelector('.file-field-visible');
@@ -370,7 +372,6 @@ const changeHandler = event => {
     if (!event.target.files.length) {
         return
     } 
-    resultImage.remove();
     const files = Array.from(event.target.files);
     
     files.forEach(file => {
@@ -378,10 +379,15 @@ const changeHandler = event => {
             return
         }
         const reader = new FileReader();
-
+        
         reader.onload = ev => {
+            const resultImage = document.querySelector('.main__create-image');
+            resultImage.remove();
             const srcImage = ev.target.result;
-            resultImageWrap.insertAdjacentHTML('afterbegin', `<img id="resultImage" class="lockImage" src="${srcImage}" alt="${file.name}">`);
+            
+            resultImageWrap.insertAdjacentHTML('afterbegin', `<div class="main__create-image" data-href="#customImagePopup" style="background-image: url(${srcImage});">
+                                                                <img src="https://dbx.so/wp-content/themes/dibix/assets/create-token/img/border-cicle.png" alt="">
+                                                                </div>`);
             customImagePopup.classList.remove('_active');
             body.classList.remove('_lock');
         }
@@ -411,20 +417,23 @@ dropZoneElement.addEventListener('dragend', e => {
 
 dropZoneElement.addEventListener('drop', e => {
     e.preventDefault();
-    resultImage.remove();
     inputImageBtn.files = e.dataTransfer.files;
-
+    
     const files = Array.from(inputImageBtn.files)
-
+    
     files.forEach(file => {
         if (!file.type.match('image')) {
             return
         }
         const reader = new FileReader();
-
+        
         reader.onload = ev => {
             const srcImage = ev.target.result;
-            resultImageWrap.insertAdjacentHTML('afterbegin', `<img id="resultImage" class="lockImage" src="${srcImage}" alt="${file.name}">`);
+            const resultImage = document.querySelector('.main__create-image');
+            resultImage.remove();
+            resultImageWrap.insertAdjacentHTML('afterbegin', `<div class="main__create-image" data-href="#customImagePopup" style="background-image: url(${srcImage});">
+                                                                <img src="https://dbx.so/wp-content/themes/dibix/assets/create-token/img/border-cicle.png" alt="">
+                                                                </div>`);
             customImagePopup.classList.remove('_active');
             body.classList.remove('_lock');
         }
@@ -435,11 +444,8 @@ dropZoneElement.addEventListener('drop', e => {
 inputImageBtn.addEventListener('change', changeHandler);
 
 
-console.log(resultImage)
 window.addEventListener('paste', e => {
-    resultImage.remove();
     e.preventDefault();
-    console.log(resultImage)
 
     if (customImagePopup.classList.contains('_active')) {
         inputImageBtn.files = e.clipboardData.files;
@@ -452,8 +458,12 @@ window.addEventListener('paste', e => {
             const reader = new FileReader();
     
             reader.onload = ev => {
+                const resultImage = document.querySelector('.main__create-image');
+                resultImage.remove();
                 const srcImage = ev.target.result;                
-                resultImageWrap.insertAdjacentHTML('afterbegin', `<img id="resultImage" class="lockImage" src="${srcImage}" alt="${file.name}">`);
+                resultImageWrap.insertAdjacentHTML('afterbegin', `<div class="main__create-image" data-href="#customImagePopup" style="background-image: url(${srcImage});">
+                                                                <img src="https://dbx.so/wp-content/themes/dibix/assets/create-token/img/border-cicle.png" alt="">
+                                                                </div>`);
                 customImagePopup.classList.remove('_active');
                 body.classList.remove('_lock');
             }
