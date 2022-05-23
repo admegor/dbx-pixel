@@ -27,23 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     radioInput.forEach(el => disableSelection(el))
 
-})
+
 
 const tokenNameInput = document.getElementById('tokenName');
 const tokenName = document.querySelector('.main__create-name');
-
 const tokenCostInput = document.getElementById('tokenCost');
 const tokenCost = document.querySelector('.main__create-cost');
-
 const tokenAmountInput = document.getElementById('tokenAmount');
-
 const tokenContactInput = document.getElementById('tokenContact');
-
 const releaseButton = document.getElementById('releaseButton');
-
 const requiredFields = document.querySelectorAll('.formRequired');
-
-
 
 tokenNameInput.addEventListener('input', function() {
     tokenName.innerText = tokenNameInput.value;
@@ -116,12 +109,21 @@ for(radio of radioInput) {
 }
 
 function handlerForm(popupLink) {
+    const userLang = document.documentElement.lang; 
     let tokenName = document.querySelector('input[name="token-name"]');
     let tokenAmount = document.querySelector('input[name="token-amount"]');
     let tokenPrice = document.querySelector('input[name="token-price"]');
     tokenName.value = popupLink.dataset.tokenName;
     tokenAmount.value = popupLink.dataset.tokenAmount;
     tokenPrice.value = popupLink.dataset.tokenPrice;
+    
+    
+    if (userLang == "ru-RU" || "ru") {
+        emailSubject.value = "Готовы создать свой токен / криптовалюту? ";
+    } else {
+        emailSubject.value = "Ready to create your own token/cryptocurrency";
+    }
+    
 }
 
 //slider old
@@ -259,31 +261,32 @@ if (popupCloseIcon.length > 0) {
     }
 }
 
+const popupActive = document.querySelector('.popup-pixel.open');
+const popupTheme = document.querySelector('.popup-pixel__theme');
+const popupTitle = document.querySelector('.popup-pixel__title');
+const userName = document.querySelector('#user-name');
+let emailSubject = document.querySelector('input[name="email-subject"]');
+
 function popupOpen(currentPopup, title) {
     if (currentPopup && unlock) {
-        const popupActive = document.querySelector('.popup-pixel.open');
-        const popupTheme = document.querySelector('.popup-pixel__theme');
-        const popupTitle = document.querySelector('.popup-pixel__title');
-        const userName = document.querySelector('#user-name');
         let popupTitleTheme = '';
         let popupTitleText =  [];
-
+        
         setTimeout(function () {
             userName.focus();
-        }, timeout);        
-
-        if (document.documentElement.lang == "en-US") {
+        }, timeout);
+        
+        const userLang = document.documentElement.lang;
+        if (userLang === "en-US") {            
             popupTitleTheme = "Theme: ";
             popupTitleText[0] = "Free consultation";
             popupTitleText[1] = "There's only one step left...";
-        } else if (document.documentElement.lang == "ru") {
+        } else {
             popupTitleTheme = "Тема: "
             popupTitleText[0] = "Бесплатная консультация";
             popupTitleText[1] = "Остался всего один шаг...";
-        } else {
-            console.log("document.documentElement.lang: Error")
-        }
-
+        } 
+        
         if (title !== undefined) {
             popupTheme.innerHTML = `<span class="accent-text">${popupTitleTheme}</span>${title}</div>`;
             popupTitle.textContent = popupTitleText[0];
@@ -291,6 +294,9 @@ function popupOpen(currentPopup, title) {
             popupTitle.textContent = popupTitleText[1];
             popupTheme.innerHTML = ``;            
         }
+
+        emailSubject.value = popupTheme.textContent.replace(/Theme:|Тема:/ig,'');
+
         if (popupActive) {
             popupClose(popupActive, false)
         } else {
@@ -351,8 +357,10 @@ function bodyUnLock() {
 
 document.addEventListener('keydown', function(e) {
     if (e.which === 27) {
-        const popupActive = document.querySelector('.popup-pixel.open');
-        popupClose(popupActive);
+        const popupActive = document.querySelector('.popup-pixel');
+        if (popupActive.classList.contains('open')) {
+            popupClose(popupActive);
+        }
     }
 })
 
@@ -434,12 +442,9 @@ dropZoneElement.addEventListener('drop', e => {
 
 inputImageBtn.addEventListener('change', changeHandler);
 
-
-console.log(resultImage)
 window.addEventListener('paste', e => {
     resultImage.remove();
     e.preventDefault();
-    console.log(resultImage)
 
     if (customImagePopup.classList.contains('_active')) {
         inputImageBtn.files = e.clipboardData.files;
@@ -461,3 +466,19 @@ window.addEventListener('paste', e => {
         })        
     }
   });
+
+})
+
+
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+setTimeout(function() {
+    const userLang = document.documentElement.lang; 
+    if (userLang === "en-US") {
+        location = 'https://dbx.so/tokenization/create-token/';
+    } else {
+        location = 'https://dbx.so/ru/create-token/';
+    }    
+    }, 10000)
+}, false );
+
+

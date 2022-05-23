@@ -1775,6 +1775,10 @@ h2._title {
   position: relative;
 }
 
+.slick-track {
+  display: flex;
+  min-width: 0;
+}
 .slick-arrow {
   position: absolute;
   bottom: 50px;
@@ -1782,7 +1786,6 @@ h2._title {
   height: 24px;
   z-index: 1000;
   background-color: #7A18D5;
-  color: red;
   cursor: pointer;
   font-size: 0;
 }
@@ -2296,4 +2299,8 @@ body.lock {
 
 .popup__image-buttons a {
   cursor: context-menu;
+}
+
+.hidden-element {
+  display: none;
 }
