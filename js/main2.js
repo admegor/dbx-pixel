@@ -193,7 +193,15 @@ $(document).ready(function(){
     $('.main__slider-slider').slick({
         infinite: true,
         slidesToShow: 1,
-        slidesToScroll: 1,  
+        slidesToScroll: 1,
+        responsive: [
+            {
+              breakpoint: 768,
+                settings: {
+                    swipe: false,
+                }
+            }
+          ]    
     });
     
     $('.main__slider-slider').on("afterChange", function(event, slick, currentSlide, nextSlide) {
@@ -221,7 +229,6 @@ const body = document.querySelector('body');
 const lockPadding = document.querySelectorAll('.lock-padding');
 
 let unlock = true;
-let yaId = 'token_eng';
 
 const timeout = 800;
 
@@ -231,9 +238,7 @@ for (let i = 0; i < popupLinks.length; i++) {
         const popupName = popupLink.getAttribute('href').replace('#', '');
         const currentPopup = document.getElementById(popupName);
         let titleModal = popupLink.dataset.theme;
-        yaId = popupLink.dataset.yaid;
-
-        popupOpen(currentPopup, titleModal, yaId);
+        popupOpen(currentPopup, titleModal);
         e.preventDefault();
 
         if (popupLink.classList.contains('main__button--popup')) {
@@ -265,7 +270,7 @@ function popupOpen(currentPopup, title) {
 
         setTimeout(function () {
             userName.focus();
-        }, timeout);
+        }, timeout);        
 
         if (document.documentElement.lang == "en-US") {
             popupTitleTheme = "Theme: ";
@@ -284,7 +289,7 @@ function popupOpen(currentPopup, title) {
             popupTitle.textContent = popupTitleText[0];
         } else {
             popupTitle.textContent = popupTitleText[1];
-            popupTheme.innerHTML = ``;
+            popupTheme.innerHTML = ``;            
         }
         if (popupActive) {
             popupClose(popupActive, false)
@@ -466,25 +471,13 @@ window.addEventListener('paste', e => {
         })        
     }
   });
-  
-function handlerYaId(ID) {
-    ym(73948678,'reachGoal',ID);
-}
 
 const popupFormSubmit = document.getElementById('popupFormSubmit');
 const popupPixelSuccess = document.getElementById('popup-pixel-success');
 let popupCounter = document.querySelector('.popup-success__timer-counter');
-const cf7Submit = document.querySelector('.main__form .wpcf7-submit');
-const mainForm = document.querySelector('#mainForm');
-
-cf7Submit.addEventListener('click', () => {
-    yaId = mainForm.dataset.yaid;
-})
 
 document.addEventListener( 'wpcf7mailsent', function() {
     popupOpen(popupPixelSuccess);
-    console.log(yaId);
-    handlerYaId(yaId);
     
     let count = 5;
     const successTimer = setInterval(() => {
@@ -504,3 +497,5 @@ document.addEventListener( 'wpcf7mailsent', function() {
             }
         }, 1000);
 }, false );
+
+    

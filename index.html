@@ -49,9 +49,23 @@
                             <input type="hidden" name="token-price">
                             <input class="file-field-hidden" type="file" id="imageSelect" accept=".png,.jpg,.jpeg,.gif">
                             <div class="popup-form__submit-wrap">
-                                <input class="popup-form__submit" type="submit" value="Отправить">                                
+                                <input id="popupFormSubmit" class="popup-form__submit" type="submit" value="Отправить">                                
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup-pixel-success" class="popup-pixel popup-success">
+            <div class="popup-pixel__body">
+                <div class="popup-pixel__content">
+                    <div class="popup-pixel__wrap">
+                        <img class="popup-success__image" src="img/success-check.svg" alt="">
+                        <h2 class="popup-pixel__title">Отлично! Ваш запрос принят</h2>
+                        <p class="popup-pixel__subtitle">Наш менеджер свяжется с вами в ближайшее время.</p>
+                        <a href="#" class="popup-success__close-btn popup-form__submit close-popup">Закрыть</a>
+                        <div class="popup-success__timer">Закроется через <span class="popup-success__timer-counter">5</span> с.</div>
                     </div>
                 </div>
             </div>

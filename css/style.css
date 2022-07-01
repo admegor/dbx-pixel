@@ -1479,7 +1479,9 @@ h2._title {
   width: 100vw;
   height: 100vh;
   left: 0;
-  top: -2000%;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
   -webkit-transition: all ease 1s;
   -o-transition: all ease 1s;
   transition: all ease 1s;
@@ -1487,6 +1489,8 @@ h2._title {
 }
 .popup__image._active {
   top: 0;
+  opacity: 1;
+  visibility: visible;
 }
 
 .popup__image-content {
@@ -2413,5 +2417,31 @@ body.lock {
   .main__create-image {
     width: 220px;
     height: 216px;
+  }
+}
+
+.popup-success__image {
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 50px;
+}
+
+.popup-success .popup-pixel__content {
+  padding: 80px 45px 10px;
+}
+
+.popup-success__timer {
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.popup-success__close-btn {
+  margin-bottom: 50px;
+}
+
+@media (max-width: 767px) {
+  .popup-success__timer {
+    font-size: 12px;
   }
 }
